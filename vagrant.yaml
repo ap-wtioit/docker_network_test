@@ -1,0 +1,16 @@
+---
+- name: vagrant vm init playbook
+  hosts: all
+  tasks:
+    - name: check user
+      shell: id
+      changed_when: False
+    - name: check sudo
+      become: true
+      shell: id
+      changed_when: False
+    - name: check hostname
+      shell: hostname
+    - name: set hostname
+      become: true
+      shell: hostname test-build-server

@@ -1,0 +1,22 @@
+---
+- name: Setup vagrant and check docker networks
+  hosts: localhost, docker_servers
+  tasks:
+    - name: run servers with vagrant
+      shell: vagrant up --no-tty
+      register: _vagrant_up
+      changed_when: >
+        'Machine already provisioned' not in _vagrant_up.stdout
+    - name: refresh inventory after vagrant files have been created
+      meta: refresh_inventory
+    - name: register test server to docker_servers
+      add_host:
+        name: "{{docker_host}}"
+        groups: docker_servers
+      loop: ["docker-25", "docker-24"]
+      loop_control:
+        loop_var: docker_host
+    - name: check /etc/resolv.conf
+      shell:
+        cmd: "cat /etc/resolv.conf"
+- import_playbook: install_docker.yaml

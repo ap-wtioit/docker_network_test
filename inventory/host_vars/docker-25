@@ -1,0 +1,6 @@
+---
+docker_ce_version: 5:25.0.2-1~ubuntu.23.10~mantic
+docker_ce_cli_version: 5:25.0.2-1~ubuntu.23.10~mantic
+containerd_io_version: 1.6.28-1
+docker_buildx_version: 0.12.1-1~ubuntu.23.10~mantic
+docker_compose_plugin_version: 2.24.5-1~ubuntu.23.10~mantic
